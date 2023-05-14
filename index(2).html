@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Modal Window Example</title>
+  <style>
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    
+    .modal-content {
+      background-color: #fefefe;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 300px;
+      text-align: center;
+    }
+
+    /* Button styles */
+    .button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button class="button" onclick="openModal()">Open</button>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <p>This is the modal window.</p>
+      <button class="button" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    function openModal() {
+      document.getElementById("modal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+     <title>Traffic Light</title>
+    <style>
+      #container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 300px;
+      }
+      .light {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+      }
+      #red {
+        background-color: red;
+      }
+      #yellow {
+        background-color: yellow;
+      }
+      #green {
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div id="red" class="light"></div>
+      <div id="yellow" class="light"></div>
+      <div id="green" class="light"></div>
+      <button onclick="nextLight()">Next Light</button>
+    </div>
+    <script>
+      var currentLight = 0;
+      var lights = document.querySelectorAll('.light');
+
+      function nextLight() {
+        // Turn off the current light
+        lights[currentLight].classList.remove('active');
+
+        // Increment the index of the current light
+        currentLight++;
+
+        // If we've gone past the last light, start again at the first one
+        if (currentLight >= lights.length) {
+          currentLight = 0;
+        }
+
+        // Turn on the new current light
+        lights[currentLight].classList.add('active');
+      }
+  </script>
+</body>
+</html>
