@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Display/Editing, Table Sorting, and Resizable Block</title>
+  <style>
+    /* Text Display/Editing */
+    .display-text {
+      display: block;
+    }
+    
+    .edit-text {
+      display: none;
+    }
+
+    /* Table Sorting */
+    table {
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      cursor: pointer;
+    }
+
+    /* Resizable Block */
+    .resizable-block {
+      width: 300px;
+      height: 200px;
+      resize: both;
+      overflow: auto;
+      border: 1px solid #ccc;
+    }
+  </style>
+</head>
+<body>
+  <!-- Text Display/Editing -->
+  <div>
+    <div id="displayText" class="display-text">This is the initial text.</div>
+    <textarea id="editText" class="edit-text" rows="5">This is the initial text.</textarea>
+  </div>
+
+  <!-- Table Sorting -->
+  <table>
+    <thead>
+      <tr>
+        <th onclick="sortTable(0)">Name</th>
+        <th onclick="sortTable(1)">Age</th>
+        <th onclick="sortTable(2)">Salary</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>John</td>
+        <td>30</td>
+        <td>50000</td>
+      </tr>
+      <tr>
+        <td>Alice</td>
+        <td>25</td>
+        <td>60000</td>
+      </tr>
+      <tr>
+        <td>Bob</td>
+        <td>35</td>
+        <td>45000</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Resizable Block -->
+  <div id="resizableBlock" class="resizable-block">
+    <p>This is a resizable block. Hold and drag the lower right corner to resize it.</p>
+  </div>
+
+  <script>
+    // Text Display/Editing
+    let displayText = document.getElementById('displayText');
+    let editText = document.getElementById('editText');
+    let isEditing = false;
+
+    window.addEventListener('keydown', function(event) {
+      if (event.ctrlKey && event.key === 'e') {
+        event.preventDefault();
+        toggleEditing();
+      } else if (event.ctrlKey && event.key === 's') {
+        event.preventDefault();
+        saveEditing();
+      }
+    });
+
+    function toggleEditing() {
+      if (isEditing) {
+        displayText.innerText = editText.value;
+        displayText.style.display = 'block';
+        editText.style.display = 'none';
+      } else {
+        editText.value = displayText.innerText;
+        displayText.style.display = 'none';
+        editText.style.display = 'block';
+        editText.focus();
+      }
+
+      isEditing = !isEditing;
+    }
+
+    function saveEditing() {
+      displayText.innerText = editText.value;
+      toggleEditing();
+    }
+
+    // Table Sorting
+    function sortTable(columnIndex) {
+      let table = document.querySelector('table');
+      let rows = Array.from(table.rows).slice(1);
+
+      rows.sort((a, b) => {
+        let aValue = a.cells[columnIndex].innerText;
+        let bValue = b.cells[columnIndex].innerText;
+
+        if (!isNaN(aValue) && !isNaN(bValue)) {
+          return parseFloat(aValue);
+          }
